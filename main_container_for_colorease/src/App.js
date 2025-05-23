@@ -1,36 +1,83 @@
 import React from 'react';
+import { ThemeProvider, useTheme } from './theme/ThemeContext';
+import ThemeToggle from './components/ThemeToggle';
 import './App.css';
 
-function App() {
+/**
+ * Main ColorEase application container
+ * @returns {JSX.Element} Main application component
+ */
+const ColorEaseApp = () => {
+  const { theme } = useTheme();
+  
   return (
-    <div className="app">
+    <div className="app" data-testid="colorease-app">
       <nav className="navbar">
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+          <div className="navbar-content">
             <div className="logo">
-              <span className="logo-symbol">*</span> KAVIA AI
+              <span className="logo-symbol">🎨</span> ColorEase
             </div>
-            <button className="btn">Template Button</button>
+            <ThemeToggle />
           </div>
         </div>
       </nav>
 
-      <main>
+      <main className="main-content">
         <div className="container">
           <div className="hero">
-            <div className="subtitle">AI Workflow Manager Template</div>
+            <div className="subtitle">Digital Coloring Made Simple</div>
             
-            <h1 className="title">main_container_for_colorease</h1>
+            <h1 className="title">ColorEase: Creative & Relaxing Digital Coloring</h1>
             
             <div className="description">
-              Start building your application.
+              Unleash your creativity and find relaxation through digital coloring. 
+              Choose from a variety of designs and create beautiful artwork with our 
+              intuitive coloring tools.
+            </div>
+          </div>
+          
+          <div className="colorease-container fade-in">
+            <h2>Start Coloring</h2>
+            <div className="canvas-placeholder">
+              {theme === 'light' ? 
+                'Canvas area - Light Theme' : 
+                'Canvas area - Dark Theme'
+              }
             </div>
             
-            <button className="btn btn-large">Button</button>
+            <div className="toolbar">
+              <button className="tool-button" title="Pencil">✏️</button>
+              <button className="tool-button" title="Brush">🖌️</button>
+              <button className="tool-button" title="Paint Bucket">🪣</button>
+              <button className="tool-button" title="Eraser">🧽</button>
+              <button className="tool-button" title="Undo">↩️</button>
+              <button className="tool-button" title="Redo">↪️</button>
+              <button className="btn">Save</button>
+              <button className="btn">Share</button>
+            </div>
           </div>
         </div>
       </main>
+      
+      <footer className="footer">
+        <div className="container">
+          <p>ColorEase © {new Date().getFullYear()} - Creative & Relaxing Digital Coloring</p>
+        </div>
+      </footer>
     </div>
+  );
+};
+
+/**
+ * App component wraps the application with ThemeProvider
+ * @returns {JSX.Element} App component with theme provider
+ */
+function App() {
+  return (
+    <ThemeProvider>
+      <ColorEaseApp />
+    </ThemeProvider>
   );
 }
 
