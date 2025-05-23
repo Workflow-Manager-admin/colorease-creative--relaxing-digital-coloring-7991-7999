@@ -1,0 +1,64 @@
+.theme-toggle-wrapper {
+  display: inline-block;
+}
+
+.theme-toggle {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.theme-toggle-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-toggle-track {
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  display: inline-block;
+  position: relative;
+  background-color: var(--toggle-bg);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
+}
+
+.theme-toggle-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  background-color: var(--toggle-thumb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-input:checked + .theme-toggle-track .theme-toggle-thumb {
+  transform: translateX(24px);
+}
+
+.theme-toggle-icon {
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improve focus accessibility */
+.theme-toggle-input:focus + .theme-toggle-track {
+  box-shadow: 0 0 0 2px var(--focus-color);
+}
+
+/* Hover effect */
+.theme-toggle:hover .theme-toggle-track {
+  opacity: 0.9;
+}
