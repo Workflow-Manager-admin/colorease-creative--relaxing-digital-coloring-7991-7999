@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/colorease-creative--relaxing-digital-coloring-7991-7999/main_container_for_colorease"
+}
