@@ -1,18 +1,48 @@
+/* Theme variables */
 :root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  /* Default/Dark theme variables */
+  --primary-color: #E87A41; /* ColorEase signature orange */
+  --secondary-color: #9764F8; /* Purple accent */
+  --bg-color: #1A1A1A; /* Dark background */
+  --bg-secondary: #2A2A2A; /* Slightly lighter background for cards/panels */
+  --text-color: #ffffff; /* White text */
+  --text-secondary: rgba(255, 255, 255, 0.7); /* Muted white text */
+  --border-color: rgba(255, 255, 255, 0.1); /* Subtle border */
+  --header-bg: #111111; /* Darker header */
+  --toggle-bg: #3A3A3A; /* Toggle background */
+  --toggle-thumb: #E87A41; /* Toggle thumb */
+  --focus-color: rgba(232, 122, 65, 0.5); /* Focus outline */
+  --shadow-color: rgba(0, 0, 0, 0.5); /* Shadows */
+  
+  /* Animation speeds */
+  --transition-speed: 0.3s;
+}
+
+/* Light theme */
+[data-theme='light'] {
+  --primary-color: #E87A41; /* Keep signature orange */
+  --secondary-color: #9764F8; /* Keep purple accent */
+  --bg-color: #F5F5F5; /* Light gray background */
+  --bg-secondary: #FFFFFF; /* White for cards/panels */
+  --text-color: #333333; /* Dark text */
+  --text-secondary: rgba(51, 51, 51, 0.7); /* Muted dark text */
+  --border-color: rgba(0, 0, 0, 0.1); /* Subtle border */
+  --header-bg: #FFFFFF; /* White header */
+  --toggle-bg: #D4D4D4; /* Toggle background */
+  --toggle-thumb: #E87A41; /* Keep toggle thumb orange */
+  --focus-color: rgba(232, 122, 65, 0.5); /* Focus outline */
+  --shadow-color: rgba(0, 0, 0, 0.1); /* Lighter shadows */
 }
 
 body {
   margin: 0;
   font-family: 'Inter', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background-color: var(--kavia-dark);
+  background-color: var(--bg-color);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-speed) ease, 
+              color var(--transition-speed) ease;
 }
 
 .app {
@@ -22,7 +52,7 @@ body {
 }
 
 .navbar {
-  background-color: var(--kavia-dark);
+  background-color: var(--header-bg);
   padding: 16px;
   display: flex;
   align-items: center;
@@ -33,6 +63,15 @@ body {
   width: 100%;
   box-sizing: border-box;
   z-index: 100;
+  transition: background-color var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .logo {
@@ -44,19 +83,26 @@ body {
 }
 
 .logo-symbol {
-  color: var(--kavia-orange);
+  color: var(--primary-color);
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
   width: 100%;
   box-sizing: border-box;
 }
 
+.main-content {
+  margin-top: 80px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .hero {
-  padding-top: 120px;
+  padding-top: 40px;
   padding-bottom: 64px;
   text-align: center;
   display: flex;
@@ -66,16 +112,20 @@ body {
 }
 
 .subtitle {
-  color: var(--kavia-orange);
+  color: var(--primary-color);
   font-weight: 500;
   font-size: 1.1rem;
 }
 
 .title {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 600;
   line-height: 1.2;
   margin: 0;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .description {
@@ -87,7 +137,7 @@ body {
 }
 
 .btn {
-  background-color: var(--kavia-orange);
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 4px;
@@ -95,14 +145,112 @@ body {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn:hover {
   background-color: #FF8B4D;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn-large {
   padding: 12px 24px;
   font-size: 1.1rem;
+}
+
+.colorease-container {
+  background-color: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px var(--shadow-color);
+  transition: background-color var(--transition-speed) ease,
+              box-shadow var(--transition-speed) ease;
+  max-width: 900px;
+  width: 100%;
+}
+
+.canvas-placeholder {
+  background: var(--bg-color);
+  border-radius: 8px;
+  height: 400px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0;
+  border: 2px dashed var(--border-color);
+  color: var(--text-secondary);
+  transition: border-color var(--transition-speed) ease;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.tool-button {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 48px;
+}
+
+.tool-button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.footer {
+  padding: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  background-color: var(--header-bg);
+  margin-top: 40px;
+  border-top: 1px solid var(--border-color);
+  transition: background-color var(--transition-speed) ease,
+              border-color var(--transition-speed) ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .colorease-container {
+    padding: 20px;
+  }
+  
+  .canvas-placeholder {
+    height: 300px;
+  }
+  
+  .toolbar {
+    gap: 8px;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
 }
